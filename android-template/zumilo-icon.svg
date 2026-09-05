@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="border" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFC928"/>
+      <stop offset="0.42" stop-color="#F05A67"/>
+      <stop offset="0.72" stop-color="#7045F5"/>
+      <stop offset="1" stop-color="#5B00FF"/>
+    </linearGradient>
+    <linearGradient id="yellow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFD333"/>
+      <stop offset="1" stop-color="#FFB800"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6D22FF"/>
+      <stop offset="1" stop-color="#4A00F0"/>
+    </linearGradient>
+    <clipPath id="innerLogo"><rect x="282" y="145" width="460" height="460" rx="100"/></clipPath>
+  </defs>
+  <rect x="28" y="28" width="968" height="968" rx="190" fill="#FFFFFF" stroke="url(#border)" stroke-width="54"/>
+  <g clip-path="url(#innerLogo)">
+    <rect x="282" y="145" width="460" height="460" fill="url(#yellow)"/>
+    <path d="M282 605 L742 145 L742 605 Z" fill="url(#purple)"/>
+  </g>
+  <text x="512" y="500" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="300" font-weight="900" fill="#FFFFFF">Z</text>
+  <text x="512" y="765" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="155" font-weight="900" letter-spacing="-6">
+    <tspan fill="#5B00FF">ZUM</tspan><tspan fill="#10B8E8">i</tspan><tspan fill="#FF5A42">L</tspan><tspan fill="#FFC928">O</tspan>
+  </text>
+  <text x="512" y="895" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="92" font-weight="800" fill="#11183F">Finanzas IA</text>
+</svg>
