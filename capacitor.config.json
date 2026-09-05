@@ -1,0 +1,10 @@
+{
+  "appId": "com.zumilo.finanzas",
+  "appName": "ZUMILO Finanzas IA",
+  "webDir": "www",
+  "server": {
+    "url": "https://finanzas-ia-9qyekh.v2.appdeploy.ai/",
+    "cleartext": false,
+    "androidScheme": "https"
+  }
+}
