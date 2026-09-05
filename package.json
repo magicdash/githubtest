@@ -1,0 +1,13 @@
+{
+  "name": "zumilo-finanzas-ia-mobile",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "echo mobile-wrapper"
+  },
+  "dependencies": {
+    "@capacitor/android": "6.2.0",
+    "@capacitor/cli": "6.2.0",
+    "@capacitor/core": "6.2.0"
+  }
+}
