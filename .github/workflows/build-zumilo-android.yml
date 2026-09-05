@@ -32,8 +32,33 @@ jobs:
         run: npx cap add android
       - name: Apply ZUMILO native Android integration
         run: cp android-template/MainActivity.java android/app/src/main/java/com/zumilo/finanzas/MainActivity.java
+      - name: Apply ZUMILO Finanzas IA launcher icon
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq librsvg2-bin imagemagick
+          for spec in "mipmap-mdpi 48" "mipmap-hdpi 72" "mipmap-xhdpi 96" "mipmap-xxhdpi 144" "mipmap-xxxhdpi 192"; do
+            set -- $spec
+            dir=$1
+            size=$2
+            mkdir -p android/app/src/main/res/$dir
+            rsvg-convert -w $size -h $size android-template/zumilo-icon.svg -o android/app/src/main/res/$dir/ic_launcher.png
+            cp android/app/src/main/res/$dir/ic_launcher.png android/app/src/main/res/$dir/ic_launcher_round.png
+            cp android/app/src/main/res/$dir/ic_launcher.png android/app/src/main/res/$dir/ic_launcher_foreground.png
+          done
+          rm -rf android/app/src/main/res/mipmap-anydpi-v26
       - name: Sync Capacitor
         run: npx cap sync android
+      - name: Re-apply launcher icon after Capacitor sync
+        run: |
+          for spec in "mipmap-mdpi 48" "mipmap-hdpi 72" "mipmap-xhdpi 96" "mipmap-xxhdpi 144" "mipmap-xxxhdpi 192"; do
+            set -- $spec
+            dir=$1
+            size=$2
+            rsvg-convert -w $size -h $size android-template/zumilo-icon.svg -o android/app/src/main/res/$dir/ic_launcher.png
+            cp android/app/src/main/res/$dir/ic_launcher.png android/app/src/main/res/$dir/ic_launcher_round.png
+            cp android/app/src/main/res/$dir/ic_launcher.png android/app/src/main/res/$dir/ic_launcher_foreground.png
+          done
+          rm -rf android/app/src/main/res/mipmap-anydpi-v26
       - name: Build installable debug APK
         working-directory: android
         run: ./gradlew assembleDebug
