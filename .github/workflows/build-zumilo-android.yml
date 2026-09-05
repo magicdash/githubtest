@@ -10,6 +10,9 @@ on:
       - 'www/**'
       - '.github/workflows/build-zumilo-android.yml'
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,9 +36,18 @@ jobs:
         run: ./gradlew assembleDebug
       - name: Rename APK
         run: cp android/app/build/outputs/apk/debug/app-debug.apk ZUMILO-Finanzas-IA-Android.apk
-      - name: Upload APK
+      - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: ZUMILO-Finanzas-IA-Android
           path: ZUMILO-Finanzas-IA-Android.apk
           retention-days: 30
+      - name: Publish stable APK download
+        run: |
+          mkdir -p downloads
+          cp ZUMILO-Finanzas-IA-Android.apk downloads/ZUMILO-Finanzas-IA-Android.apk
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add downloads/ZUMILO-Finanzas-IA-Android.apk
+          git commit -m "Publish latest ZUMILO Android APK" || exit 0
+          git push
