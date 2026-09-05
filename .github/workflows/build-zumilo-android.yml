@@ -8,6 +8,7 @@ on:
       - 'package.json'
       - 'capacitor.config.json'
       - 'www/**'
+      - 'android-template/**'
       - '.github/workflows/build-zumilo-android.yml'
 
 permissions:
@@ -29,6 +30,8 @@ jobs:
         run: npm install
       - name: Create Android project
         run: npx cap add android
+      - name: Apply ZUMILO native Android integration
+        run: cp android-template/MainActivity.java android/app/src/main/java/com/zumilo/finanzas/MainActivity.java
       - name: Sync Capacitor
         run: npx cap sync android
       - name: Build installable debug APK
