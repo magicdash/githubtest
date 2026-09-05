@@ -23,6 +23,13 @@ public class MainActivity extends BridgeActivity {
 
     mainWebView = getBridge().getWebView();
     configureWebView(mainWebView);
+    mainWebView.setWebViewClient(new WebViewClient() {
+      @Override
+      public void onPageFinished(WebView view, String url) {
+        super.onPageFinished(view, url);
+        markNativeApp(view);
+      }
+    });
 
     mainWebView.setWebChromeClient(new BridgeWebChromeClient(getBridge()) {
       @Override
@@ -46,6 +53,10 @@ public class MainActivity extends BridgeActivity {
     CookieManager cookieManager = CookieManager.getInstance();
     cookieManager.setAcceptCookie(true);
     cookieManager.setAcceptThirdPartyCookies(webView, true);
+  }
+
+  private void markNativeApp(WebView webView) {
+    webView.evaluateJavascript("(function(){window.__ZUMILO_NATIVE_ANDROID__=true;document.documentElement.setAttribute('data-zumilo-native','android');var s=document.getElementById('zumilo-native-hide-install');if(!s){s=document.createElement('style');s.id='zumilo-native-hide-install';s.textContent='.installPair,.installGuide,.androidInstall,.iosInstall{display:none!important}';document.head.appendChild(s);}var buttons=document.querySelectorAll('button');buttons.forEach(function(b){var t=(b.innerText||b.textContent||'').trim().toLowerCase();if(t.indexOf('instalar app')>=0||t.indexOf('instalar en android')>=0||t.indexOf('instalar en iphone')>=0){b.style.setProperty('display','none','important');}});})();", null);
   }
 
   private boolean createPopup(WebView opener, Message resultMsg) {
